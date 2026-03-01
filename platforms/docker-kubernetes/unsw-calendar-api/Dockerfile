@@ -1,40 +1,49 @@
 ####### BUILD IMAGE #######
-FROM node:20-alpine AS build
+FROM node:24-alpine AS build
 
 # set working dir inside container 
-WORKDIR /app        
+WORKDIR /app       
+
+# Enable pnpm via corepack
+RUN corepack enable
 
 # copy app files 
-COPY package*.json ./
+COPY package.json pnpm-lock.yaml ./
 
 # install all dependencies 
-RUN npm ci
+RUN pnpm install --frozen-lockfile
 
 # copy rest of source code
 COPY . .
 
 # compiles TS -> JS
-RUN npm run build
+RUN pnpm run build
 
 ##### RUN CONTAINER #####
-FROM node:20-alpine AS production
+FROM node:24-alpine AS production
 
 WORKDIR /app
 
+RUN corepack enable
+
+# copy only prod dependencies
+COPY package.json pnpm-lock.yaml ./
+
+RUN pnpm install --prod --frozen-lockfile
+
 # copy compiled code & prod dependencies 
 COPY --from=build /app/dist ./dist
-COPY --from=build /app/node_modules ./node_modules
-COPY --from=build /app/package.json ./package.json
-
-# install only prod dependencies
-RUN npm ci --production
 
 # setup app/non-root user for security
 RUN addgroup -S appgroup && adduser -S appuser -G appgroup
+# create cache directory and give ownership to user
+RUN mkdir -p /app/cache && chown -R appuser:appgroup /app/cache
+# switch to non-root user
 USER appuser
 
+# Listen on all interfaces
+ENV HOST=0.0.0.0
 ENV NODE_ENV=production
-
 EXPOSE 3000
 
 # start server

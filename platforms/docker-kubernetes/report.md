@@ -8,10 +8,12 @@
 <!-- Explain any specific goals or design decisions -->
 Recommended to use a multi-stage build for a Fastify server in TS -> this creates smaller/secure final image by separating TS compilation from the runtime environment
 
-1. BUILD STAGE - `node:20-alpine` for smaller image
+1. BUILD STAGE - `node:24-alpine` for smaller image
 2. PRODUCTION STAGE - add non-root user to run app to reduce security risks
 
 `.dockerignore` excludes files not needed to send to Docker daemon to build & run container -> speeds up builds & prevents secrets 
+
+Challenges - working with engine constraints (node 24) & pnpm + managing ownership to appuser    
 
 ### Forked repository
 
