@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <title>Freerooms</title>
+</head>
+
+<body>
+    <header class="Header">
+        <div class="freeRoomsLogo" onclick="toggleDoor()">
+            <img id="door" src="assets/freeRoomsLogo.png" alt="freerooms logo">
+            <h1>Freerooms</h1>
+        </div>
+        <script>
+            function toggleDoor() {
+                const currDoor = document.getElementById("door");
+                if (currDoor.src.endsWith("freeroomsDoorClosed.png")) {
+                    currDoor.src = "assets/freeRoomsLogo.png";
+                } else {
+                    currDoor.src = "assets/freeroomsDoorClosed.png";
+                }
+            }
+        </script>
+
+        <div class="navigationMenu">
+            <button type="button" class="searchButton">
+                <svg xmlns="http://www.w3.org/2000/svg" height="35px" 
+                     viewBox="0 -960 960 960" width="25px" fill="#ef6c00">
+                    <path d="M765-144 526-383q-30 22-65.79 34.5-35.79 12.5-76.18 
+                            12.5Q284-336 214-406t-70-170q0-100 70-170t170-70q100 
+                            0 170 70t70 170.03q0 40.39-12.5 76.18Q599-464 577-434l239 
+                            239-51 51ZM384-408q70 0 119-49t49-119q0-70-49-119t-119-49q-70 
+                            0-119 49t-49 119q0 70 49 119t119 49Z"/>
+                </svg>
+            </button>
+
+            <button type="button" class="gridButton">
+                <svg height="25px" viewBox="0 0 24 24" width="25px" 
+                     fill="#ef6c00" data-testid="GridIcon">
+                    <path d="M5 11h4c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2H5c-1.1 
+                            0-2 .9-2 2v4c0 1.1.9 2 2 2m0 10h4c1.1 0 2-.9 
+                            2-2v-4c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v4c0 1.1.9 2 2 
+                            2m8-16v4c0 1.1.9 2 2 2h4c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-4c-1.1 
+                            0-2 .9-2 2m2 16h4c1.1 0 2-.9 2-2v-4c0-1.1-.9-2-2-2h-4c-1.1 0-2 
+                            .9-2 2v4c0 1.1.9 2 2 2">
+                    </path>
+                </svg>
+            </button>
+
+            <button type="button" class="mapButton"> 
+                <svg height="25px" viewBox="0 0 24 24" fill="#ef6c00" data-testid="MapIcon">
+                    <path d="m20.5 3-.16.03L15 5.1 9 3 3.36 4.9c-.21.07-.36.25-.36.48V20.5c0
+                            .28.22.5.5.5l.16-.03L9 18.9l6 2.1 
+                            5.64-1.9c.21-.07.36-.25.36-.48V3.5c0-.28-.22-.5-.5-.5M15 
+                            19l-6-2.11V5l6 2.11z">
+                    </path>
+                </svg>
+            </button>
+
+            <button>
+                <svg viewBox="0 0 24 24" fill="#ef6c00" data-testid="DarkModeIcon">
+                    <path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 
+                            9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 
+                            2.26-4.4 2.26-2.98 0-5.4-2.42-5.4-5.4 0-1.81.89-3.42 
+                            2.26-4.4-.44-.06-.9-.1-1.36-.1">
+                    </path>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <main class="Body">
+        <div class="Search">
+            <div class="filterButton">
+                <p id="filterIcon">
+                    <svg height="30px" viewBox="0 0 24 24" 
+                            fill="#F77F00" data-testid="FilterAltIcon">
+                        <path d="M4.25 5.61C6.27 8.2 10 13 10 13v6c0 .55.45 
+                                1 1 1h2c.55 0 1-.45 1-1v-6s3.72-4.8 
+                                5.74-7.39c.51-.66.04-1.61-.79-1.61H5.04c-.83 
+                                0-1.3.95-.79 1.61">
+                        </path>
+                    </svg>
+                </p>
+                <p id="filterText">Filters</p>
+            </div>
+
+            <div class="searchBar">
+                <div class="searchIcon">
+                    <svg height="30px" viewBox="0 0 24 24" 
+                        fill="rgba(0, 0, 0, 0.54)" data-testid="SearchIcon">
+                        <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 
+                                16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 
+                                16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 
+                                4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 
+                                9.5 5 14 7.01 14 9.5 11.99 14 9.5 14">
+                        </path>
+                    </svg>
+                </div>
+                <input class="searchInput" type="text" placeholder="Search for a building...">
+            </div>
+
+            <div class="sortButton">
+                <p id="sortIcon">
+                    <svg height="30px" viewBox="0 0 24 24" 
+                        fill="#F77F00" data-testid="FilterListIcon">
+                        <path d="M10 18h4v-2h-4zM3 6v2h18V6zm3 7h12v-2H6z"></path>
+                    </svg>
+                </p>
+                <p id="sortText">Sort</p>
+            </div>
+        </div>
+        <!-- AGSM -->
+        <div class="buildings">
+            <div class="building">
+                <img srcset="assets/agsm.webp" alt="agsm image">
+
+                <div class="roomsLabel">
+                    <div class="availableDot"></div>
+                    <p>9 rooms available</p>
+                </div>
+                <div class="nameLabel">
+                    <p class="buildingName">AGSM</p>
+                </div>
+            </div>
+            <!-- Ainsworth Building -->
+            <div class="building">
+                <img srcset="assets/ainsworth.webp" alt="ainsworth image">
+
+                <div class="roomsLabel">
+                    <div class="availableDot"></div>
+                    <p>16 rooms available</p>
+                </div>
+                <div class="nameLabel">
+                    <p class="buildingName">Ainsworth Building</p>
+                </div>
+            </div>
+            <!-- Anita B Lawrence -->
+            <div class="building">
+                <img srcset="assets/anitab.webp" alt="anita image">
+
+                <div class="roomsLabel">
+                    <div class="availableDot"></div>
+                    <p>44 rooms available</p>
+                </div>
+                <div class="nameLabel">
+                    <p class="buildingName">Anita B Lawrence Centre</p>
+                </div>
+            </div>
+            <!-- Biological Sciences -->
+            <div class="building">
+                <img srcset="assets/biologicalScience.webp" alt="biological image">
+
+                <div class="roomsLabel">
+                    <div class="availableDot"></div>
+                    <p>6 rooms available</p>
+                </div>
+                <div class="nameLabel">
+                    <p class="buildingName">Biological Sciences</p>
+                </div>
+            </div>
+            <!-- Biological Sciences (West) -->
+            <div class="building">
+                <img srcset="assets/biologicalScienceWest.webp" alt="biologicalWest image">
+
+                <div class="roomsLabel">
+                    <div class="availableDot"></div>
+                    <p>8 rooms available</p>
+                </div>
+                <div class="nameLabel">
+                    <p class="buildingName">Biological Sciences (West)</p>
+                </div>
+            </div>
+            <!-- Blockhouse -->
+            <div class="building">
+                <img srcset="assets/blockhouse.webp" alt="blockhouse image">
+
+                <div class="roomsLabel">
+                    <div class="availableDot"></div>
+                    <p>42 rooms available</p>
+                </div>
+                <div class="nameLabel">
+                    <p class="buildingName">Blockhouse</p>
+                </div>
+            </div>
+            <!-- Business School -->
+            <div class="building">
+                <img srcset="assets/businessSchool.webp" alt="business image">
+
+                <div class="roomsLabel">
+                    <div class="availableDot"></div>
+                    <p>18 rooms available</p>
+                </div>
+                <div class="nameLabel">
+                    <p class="buildingName">Business School</p>
+                </div>
+            </div>
+            <!-- Civil Eng -->
+            <div class="building">
+                <img srcset="assets/civilBuilding.webp" alt="civil image">
+
+                <div class="roomsLabel">
+                    <div class="availableDot"></div>
+                    <p>8 rooms available</p>
+                </div>
+                <div class="nameLabel">
+                    <p class="buildingName">Civil Engineering Building</p>
+                </div>
+            </div>
+            <!-- Colombo -->
+            <div class="building">
+                <img srcset="assets/colombo.webp" alt="colombo image">
+
+                <div class="roomsLabel">
+                    <div class="availableDot"></div>
+                    <p>5 rooms available</p>
+                </div>
+                <div class="nameLabel">
+                    <p class="buildingName">Colombo Building</p>
+                </div>
+            </div>
+            <!-- Computer Science & Engineering -->
+            <div class="building">
+                <img srcset="assets/cseBuilding.webp" alt="cse image">
+
+                <div class="roomsLabel">
+                    <div class="availableDot"></div>
+                    <p>7 rooms available</p>
+                </div>
+                <div class="nameLabel">
+                    <p class="buildingName">Computer Science & Eng (K17)</p>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

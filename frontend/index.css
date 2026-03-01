@@ -1,0 +1,233 @@
+@font-face {
+    font-family: 'Josefin Sans';
+    src: url(https://fonts.gstatic.com/s/josefinsans/v32/Qw3PZQNVED7rKGKxtqIqX5E-AVSJrOCfjY46_DjQbMZhLybpUVzEEQ.woff2);
+}
+
+.freeRoomsLogo {
+    display: flex;
+}
+
+.freeRoomsLogo img {
+    width: 50px;
+    height: 50px;
+    color: transparent;
+    cursor: pointer;
+}
+
+.freeRoomsLogo h1 {
+    margin: 0;
+    font-family: 'Josefin Sans';
+    font-weight: 600;
+    font-size: 2rem;
+    line-height: 60px;
+    letter-spacing: 1.3px;
+    color: #ef6c00;
+}
+
+.navigationMenu {
+    display: flex;
+    position: absolute;
+    gap: 10px;
+    top: 10px;
+    right: 10px;
+}
+
+button {
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
+    border-color: #ef6c00;
+    border-width: 1px;
+    border-style: solid;
+    background-color: #ffffff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+body {
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    line-height: 1.5px;
+    letter-spacing: 1px;
+}
+
+.Search {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    flex-wrap: wrap;
+}
+
+.filterButton, .sortButton {
+    display: flex;
+    flex-direction: row;
+    height: 35px;
+    width: 120px;
+    align-self: center;
+    justify-items: center;
+    position: relative;
+    border-color: #ef6c00;
+    border-style: solid;
+    border-radius: 10px;
+    z-index: 10;
+}
+
+#filterIcon, #sortIcon {
+    display: inline-block;
+    margin-block-start: 2px;
+    margin-inline-start: 5px;
+}
+
+#filterText, #sortText {
+    display: inline-block;
+    color: #F77F00;
+    font-weight: bold;
+    margin-left: 8px;
+}
+
+.searchBar {
+    display: flex;
+    flex-grow: 1;
+    position: relative;
+    width: auto;
+    align-items: center;
+    justify-content: center;
+}
+
+.searchIcon {
+    left: 100px;
+    display: inline-block;
+    margin-right: -40px;
+    align-items: center;
+    z-index: 1;
+}
+
+.searchInput {
+    height: 25px;
+    width: 75%;
+    box-sizing: content-box;
+    padding: 5px 10px;
+}
+
+input[type="text" i] {
+    padding-inline: 40px;
+}
+
+/* @media (max-width: 500px) {
+    .Search {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .searchBar {
+        width: 100%; 
+        margin-top: 10px;
+    }
+
+    .filterButton, .sortButton {
+        width: 30%; 
+        display: inline-flex;
+        flex-direction: row;
+    }
+} */
+
+.buildings {
+    position: relative;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    top: 30px;
+}
+
+.buildings img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    color: transparent;
+    border-radius: 10px;
+    box-sizing: inherit;
+}
+
+.building {
+    position: relative;
+    overflow: hidden;
+}
+
+.nameLabel {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    position: absolute;
+    border-radius: 10px;
+    background-color: #ef6c00;
+    color: white; 
+    padding: 0px 20px;
+    margin: 10px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    box-sizing: border-box;
+    -webkit-box-pack: justify;
+    -webkit-text-size-adjust: 100%;
+}
+
+.buildingName {
+    font-size: 12px;
+    line-height: 10px;
+}
+
+/* @media (max-width: 400px) {
+    .nameLabel {
+        flex-direction: column; 
+    }
+    .rating {
+        justify-content: center; 
+        margin-top: 5px; 
+    }
+} */
+
+.rating {
+    display: flex;
+    align-items: center;
+    gap: 0px;
+}
+
+.rating p {
+    display: block;
+    line-height: 1.5px;
+    letter-spacing: 1px;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.star {
+    width: 20px;
+    height: 20px;
+    fill: rgb(255, 169, 12);
+}
+
+.roomsLabel {
+    display: flex;
+    position: absolute;
+    -webkit-box-pack: center;
+    -webkit-box-align: center;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    top: 0px;
+    right: 0px;
+    padding: 3px 10px;
+    margin: 10px;
+    background-color:#ffffff;
+    font-size: 10px;
+}
+
+.availableDot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: rgb(76, 175, 80);
+    margin-right: 10px;
+}
