@@ -11,6 +11,8 @@ Recommended to use a multi-stage build for a Fastify server in TS -> this create
 1. BUILD STAGE - `node:20-alpine` for smaller image
 2. PRODUCTION STAGE - add non-root user to run app to reduce security risks
 
+`.dockerignore` excludes files not needed to send to Docker daemon to build & run container -> speeds up builds & prevents secrets 
+
 ### Forked repository
 
 <!-- If you submitted your changes to a fork, replace with your forked repository -->

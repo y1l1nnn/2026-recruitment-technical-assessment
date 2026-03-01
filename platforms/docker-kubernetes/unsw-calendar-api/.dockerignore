@@ -1,0 +1,24 @@
+# node dependencies
+node_modules
+.pnpm-store
+
+# build artifacts
+dist
+
+# env files
+.env
+.env.*
+
+# editor
+.vscode
+.idea
+
+# version control
+.git
+.gitignore
+
+# logs
+*.log
+
+# OS files
+.DS_Store
