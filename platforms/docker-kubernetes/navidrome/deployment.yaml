@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: navidrome
-          image: deluan/navidrome:latest
+          image: deluan/navidrome:latest #docker image tag
           ports:
             - containerPort: 4533
           env:

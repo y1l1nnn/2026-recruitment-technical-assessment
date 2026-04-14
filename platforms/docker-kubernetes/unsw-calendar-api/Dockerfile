@@ -24,9 +24,10 @@ FROM node:24-alpine AS production
 
 WORKDIR /app
 
+# corepack manages yarn & pnpm
 RUN corepack enable
 
-# copy only prod dependencies
+# copy only prod dependencies -> leverage the cache -> efficiency 
 COPY package.json pnpm-lock.yaml ./
 
 RUN pnpm install --prod --frozen-lockfile
@@ -42,8 +43,12 @@ RUN mkdir -p /app/cache && chown -R appuser:appgroup /app/cache
 USER appuser
 
 # Listen on all interfaces
-ENV HOST=0.0.0.0
+
+# binds 0.0.0.0 (represents all networks) to make sure containerised env is accessible from outside 
+ENV HOST=0.0.0.0 
+# standard practice for Node.js
 ENV NODE_ENV=production
+# listen at a specified port at runtime
 EXPOSE 3000
 
 # start server
