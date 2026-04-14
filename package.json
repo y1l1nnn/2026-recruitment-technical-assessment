@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "fastify": "^5.7.4",
+    "https": "^1.0.0"
+  },
+  "devDependencies": {
+    "@types/supertest": "^7.2.0",
+    "supertest": "^7.2.2"
+  }
+}
