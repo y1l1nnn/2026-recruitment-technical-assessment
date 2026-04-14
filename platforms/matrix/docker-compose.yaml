@@ -1,0 +1,28 @@
+# version: '3'
+
+services:
+  synapse:
+    image: matrixdotorg/synapse:latest
+    container_name: synapse
+    restart: unless-stopped
+    volumes:
+      - ./synapse-data:/data
+    ports:
+      - "8008:8008"
+    networks:
+      - matrix-net
+
+  static:
+    image: nginx:alpine
+    container_name: static
+    restart: unless-stopped
+    volumes:
+      - ./static:/usr/share/nginx/html:ro
+    ports:
+      - "8080:80"
+    networks:
+      - matrix-net
+
+networks:
+  matrix-net:
+    driver: bridge
