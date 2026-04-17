@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: synapse-pvc
+  namespace: elaine-matrix
+spec:
+  accessModes:
+    - ReadWriteOnce # only one pod can mount at a time
+  resources:
+    requests:
+      storage: 1Gi

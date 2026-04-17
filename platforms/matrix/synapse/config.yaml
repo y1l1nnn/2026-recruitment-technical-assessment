@@ -1,0 +1,46 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: synapse-config
+  namespace: elaine-matrix
+data:
+  homeserver.yaml: |
+    server_name: "elaine-matrix.platso.cc" 
+    public_baseurl: "https://elaine-matrix.platso.cc"
+    pid_file: /data/homeserver.pid
+    signing_key_path: /data/elaine-matrix.platso.cc.signing.key
+    media_store_path: /data/media_store
+    log_config: "/data/log.config"
+    listeners:
+      - port: 8008
+        tls: false
+        type: http
+        x_forwarded: true
+        bind_addresses: ['0.0.0.0']
+        resources:
+          - names: [client, federation]
+    enable_registration: true
+    enable_registration_without_verification: true
+    registration_shared_secret: "<secret-shh>"
+    database:
+      name: sqlite3
+      args:
+        database: /data/homeserver.db
+    report_stats: false
+    trusted_key_servers:
+      - server_name: "matrix.org"
+    suppress_key_server_warning: true
+    serve_server_wellknown: true
+  log.config: |
+    version: 1
+    formatters:
+      precise:
+        format: '%(asctime)s - %(name)s - %(lineno)d - %(levelname)s - %(request)s - %(message)s'
+    handlers:
+      console:
+        class: logging.StreamHandler
+        formatter: precise
+        level: INFO
+    root:
+      level: INFO
+      handlers: [console]
