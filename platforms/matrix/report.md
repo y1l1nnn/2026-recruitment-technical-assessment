@@ -62,6 +62,22 @@
     - TLS is handled by Cloudflare 
     - let server know its running behind a reverse proxy -> trust the client IP passed through the proxy
     - serve both APIs (client, fed) on the same port
+  
+    ```
+    enable_registration: true
+    enable_registration_without_verification: true
+    ```
+
+    - allows new user creation + shared secret allows admin
+  
+    ```
+    serve_server_wellknown: true
+    ```
+
+    - makes Synapse automatically serve
+        - `/.well-known/matrix/server` -> `{"m.server":"elaine-matrix.platso.cc:443"}`
+        - `/.well-known/matrix/client` -> `{"m.homeserver":{"base_url":"https://elaine-matrix.platso.cc"}}`
+      for federation and tells other servers to connect to port 443 instead rather than default 8448
     
 4. create pvc -> apply
 
