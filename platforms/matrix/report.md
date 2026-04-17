@@ -4,6 +4,8 @@
 > Use this document to record your progress, the problems you faced and how you solved (or avoided) them.
 > You can include images or add files in this directory if you want.
 
+> [in progress...]
+
 ### Summary 
 
 - **implementation**: Synapse  
@@ -16,14 +18,18 @@
 - `config.yaml` - configmap stores config data/two key files that get mounted into the container 
     - `homeserver.yaml` - Synapse's main config 
     - `log.config` - Python logging config
-- `deployment.yaml` - 
-
+- `deployment.yaml` - defines Synapse pod (what container, num replicas, config)
+- `httproute.yaml` - migrated from istio gateway to gateway api (reverse proxy to route traffic) 
+- `service.yaml` - expose Synapse internally within cluster on port 8008 (anything within cluster can reach w)
 
 ### Procedure 
 
 1. login to wheatley 
 2. create k8s namespace `elaine-matrix`
-3. create ConfigMap -> apply 
+3. create a DNS record
+    - A | elaine-matrix | Wheatley IP | Proxied
+5. create pvc -> apply (create storage)
+6. create configmap -> apply (apply config)
 
     `log.config` - defines how logs are handled -> debugging
 
@@ -79,7 +85,19 @@
         - `/.well-known/matrix/client` -> `{"m.homeserver":{"base_url":"https://elaine-matrix.platso.cc"}}`
       for federation and tells other servers to connect to port 443 instead rather than default 8448
     
-4. create pvc -> apply
+7. create deployment -> apply (deploy synapse)
+8. create service -> apply (expose internally) 
+9. create httproute -> apply (expose externally)
+10. verify synapse is reachable
+
+   ```
+   curl https://elaine-matrix.platso.cc/_matrix/client/versions
+   # Returns JSON list of supported Matrix versions
+
+   curl https://elaine-matrix.platso.cc/.well-known/matrix/server
+   # Returns {"m.server":"elaine-matrix.platso.cc:443"}
+   ```
+11. create user -> login -> send msg
 
 ## Matrix Handle
 
