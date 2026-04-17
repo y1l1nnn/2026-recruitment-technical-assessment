@@ -6,9 +6,9 @@
 
 ### Summary 
 
-**implementation**: Synapse  
-**server**: Wheatley - k8s cluster by csesoc   
-**storage**: k8s pvc for SQLite   
+- **implementation**: Synapse  
+- **server**: Wheatley - k8s cluster by csesoc   
+- **storage**: k8s pvc for SQLite   
 
 ### Manifests 
 
@@ -25,6 +25,8 @@
 2. create k8s namespace `elaine-matrix`
 3. create ConfigMap -> apply 
 
+    `log.config` - defines how logs are handled -> debugging
+
     `homeserver.yaml`
 
     ```
@@ -39,15 +41,27 @@
     public_baseurl: "https://elaine-matrix.platso.cc"
     ```
 
-    - public facing url clients to reach the homeserver 
+    - public facing url clients to reach the homeserver   
 
     ```
     signing_key_path: /data/elaine-matrix.platso.cc.signing.key
     ```
 
-    - where Synapse stores cryptographic signing key (lives on pvc) - other homeservers use this key to verify federation traffic is legit
+    - where Synapse stores cryptographic signing key (lives on pvc) - other homeservers use this key to verify federation traffic is legit 
 
-    `log.config` - defines how logs are handled -> debugging
+    ```
+    listeners:
+        - port: 8008
+            tls: false           
+            x_forwarded: true   
+            resources:
+                - names: [client, federation] 
+    ```
+
+    - listen on port 8008
+    - TLS is handled by Cloudflare 
+    - let server know its running behind a reverse proxy -> trust the client IP passed through the proxy
+    - serve both APIs (client, fed) on the same port
     
 4. create pvc -> apply
 
